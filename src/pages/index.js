@@ -4,6 +4,7 @@ export default function Home() {
   const [cidr, setCidr] = useState('');
   const [firstIp, setFirstIp] = useState('');
   const [lastIp, setLastIp] = useState('');
+  const [history, setHistory] = useState([]);
 
   const handleCidrChange = (event) => {
     setCidr(event.target.value);
@@ -26,25 +27,45 @@ export default function Home() {
 
     setFirstIp(firstIpParts.join('.'));
     setLastIp(lastIpParts.join('.'));
+
+    setHistory([...history, { cidr, firstIp: firstIpParts.join('.'), lastIp: lastIpParts.join('.') }]);
   };
 
   return (
-    <div>
-      <h1>CIDR to IPv4 Converter</h1>
-      <label>
-        CIDR:
-        <input type="text" value={cidr} onChange={handleCidrChange} />
-      </label>
+    <>
+      <div>
+        <h1>CIDR to IPv4 Converter</h1>
+        <div>
+        <label>
+          CIDR:
+          <input type="text" value={cidr} onChange={handleCidrChange} />
+        </label>
+        
+        <button onClick={handleConvert}>Convert</button>
+        </div>
+        <br />
+        <label>
+          First IP: <input type="text" value={firstIp} readOnly />
+        </label>
+        <br />
+        <label>
+          Last IP: <input type="text" value={lastIp} readOnly />
+        </label>
+      </div>
       <br />
-      <button onClick={handleConvert}>Convert</button>
-      <br />
-      <label>
-        First IP: <input type="text" value={firstIp} readOnly />
-      </label>
-      <br />
-      <label>
-        Last IP: <input type="text" value={lastIp} readOnly />
-      </label>
-    </div>
+      {history.length > 0 && (
+        <div>
+          <h2>Recent records</h2>
+          {history.map((item, index) => (
+            <div key={index}>
+            <br />
+              <p>CIDR: {item.cidr}</p>
+              <p>First IP: {item.firstIp}</p>
+              <p>Last IP: {item.lastIp}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
