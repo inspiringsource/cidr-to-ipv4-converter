@@ -1,3 +1,7 @@
+## Description
+
+The CIDR to IPv4 Converter tool simplifies IP planning and VPC design decisions by quickly converting CIDR notation to the first and last IP addresses in the specified range. With an easy-to-use interface, users can input CIDR notation and receive the range of IP addresses, enabling more efficient network management and IP address allocation.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
